@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ToDoList.css";
 
 const ToDoList = (props) => {
-  const [tasks, setTasks] = useState(props.sampleData);
+  const [tasks] = useState(props.sampleData);
 
   console.log("===> tasks", tasks);
   return (
