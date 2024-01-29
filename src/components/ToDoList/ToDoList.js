@@ -7,21 +7,48 @@ const ToDoList = (props) => {
   const [visible, setVisible] = useState(false);
 
   const addNewtask = (newTask) => {
-    console.log("===> called", newTask)
     const newTasks = [...tasks, { title: newTask, completed: false }];
-    setTasks(newTasks)
-  }
+    setTasks(newTasks);
+  };
+
+  const markAsCompleteOrIncomplete = (index) => {
+    let updatedTasks = [...tasks];
+    if (updatedTasks[index].completed) {
+      updatedTasks[index].completed = false;
+    } else {
+      updatedTasks[index].completed = true;
+    }
+    setTasks(updatedTasks);
+  };
 
   return (
-    <div className="container">
-      <div>
+    <div>
+      <div className="container">
         {tasks.map((task, i) => {
           return (
-            <div className="card" key={i}>
-              <p className="title">{task.title}</p>
-              <p className="status">
-                {task.completed ? "- Completed": "- Not completed"}
-              </p>
+            <div className="card-container">
+              <div className="card" key={i}>
+                <p className="title">{task.title}</p>
+                <p className="status">
+                  {task.completed ? "- Completed" : "- Not completed"}
+                </p>
+              </div>
+              {task.completed && (
+                <button
+                  className="markCompleteButton"
+                  onClick={() => markAsCompleteOrIncomplete(i)}
+                >
+                  Mark as Complete
+                </button>
+              )}
+              {!task.completed && (
+                <button
+                  className="markCompleteButton"
+                  onClick={() => markAsCompleteOrIncomplete(i)}
+                >
+                  Mark as incomplete
+                </button>
+              )}
             </div>
           );
         })}
@@ -29,7 +56,11 @@ const ToDoList = (props) => {
       <div className="buttonContainer">
         <button onClick={() => setVisible(true)}>Add Task</button>
       </div>
-      <AddTask visible={visible} setVisible={setVisible} addNewtask={addNewtask}/>
+      <AddTask
+        visible={visible}
+        setVisible={setVisible}
+        addNewtask={addNewtask}
+      />
     </div>
   );
 };
