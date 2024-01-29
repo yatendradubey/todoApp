@@ -5,6 +5,7 @@ import AddTask from "./AddTask/AddTask";
 const ToDoList = (props) => {
   const [tasks, setTasks] = useState(props.sampleData);
   const [visible, setVisible] = useState(false);
+  let count = 0;
 
   const addNewtask = (newTask) => {
     const newTasks = [...tasks, { title: newTask, completed: false }];
@@ -21,9 +22,24 @@ const ToDoList = (props) => {
     setTasks(updatedTasks);
   };
 
+  const calculateCompletedTask = () =>  {
+    count = 0;
+    tasks.map((task) => {
+        if(task.completed) {
+            count++;
+        }
+    })
+    return count;
+  }
+
   return (
     <div>
       <div className="container">
+        <div className="taskCount">
+          <label>Total Task: {tasks.length}</label>&nbsp;
+          <label>Completed Task: {calculateCompletedTask()}</label>&nbsp;
+          <label>Pending Task: {tasks.length - calculateCompletedTask()}</label>
+        </div>
         {tasks.map((task, i) => {
           return (
             <div className="card-container" key={i}>
