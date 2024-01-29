@@ -3,11 +3,13 @@ import "./ToDoList.css";
 import AddTask from "./AddTask/AddTask";
 
 const ToDoList = (props) => {
-  const [tasks] = useState(props.sampleData);
+  const [tasks, setTasks] = useState(props.sampleData);
   const [visible, setVisible] = useState(false);
 
-  const addNewtask = () => {
-    console.log("===> called")
+  const addNewtask = (newTask) => {
+    console.log("===> called", newTask)
+    const newTasks = [...tasks, { title: newTask, completed: false }];
+    setTasks(newTasks)
   }
 
   return (
@@ -27,7 +29,7 @@ const ToDoList = (props) => {
       <div className="buttonContainer">
         <button onClick={() => setVisible(true)}>Add Task</button>
       </div>
-      <AddTask visible={visible} setVisible={setVisible} addNewtask={() => addNewtask()}/>
+      <AddTask visible={visible} setVisible={setVisible} addNewtask={addNewtask}/>
     </div>
   );
 };
