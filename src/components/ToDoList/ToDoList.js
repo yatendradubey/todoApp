@@ -26,14 +26,14 @@ const ToDoList = (props) => {
       <div className="container">
         {tasks.map((task, i) => {
           return (
-            <div className="card-container">
-              <div className="card" key={i}>
+            <div className="card-container" key={i}>
+              <div className="card">
                 <p className="title">{task.title}</p>
                 <p className="status">
                   {task.completed ? "- Completed" : "- Not completed"}
                 </p>
               </div>
-              {task.completed && (
+              {!task.completed && (
                 <button
                   className="markCompleteButton"
                   onClick={() => markAsCompleteOrIncomplete(i)}
@@ -41,12 +41,12 @@ const ToDoList = (props) => {
                   Mark as Complete
                 </button>
               )}
-              {!task.completed && (
+              {task.completed && (
                 <button
                   className="markCompleteButton"
                   onClick={() => markAsCompleteOrIncomplete(i)}
                 >
-                  Mark as incomplete
+                  Mark as Incomplete
                 </button>
               )}
             </div>
