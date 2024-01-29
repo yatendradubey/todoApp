@@ -1,0 +1,17 @@
+.modal {
+  background-color: aliceblue;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.titleLabel {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.addTaskButton {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}

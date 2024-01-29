@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import "./ToDoList.css";
+import AddTask from "./AddTask/AddTask";
 
 const ToDoList = (props) => {
   const [tasks] = useState(props.sampleData);
+  const [visible, setVisible] = useState(false);
 
-  console.log("===> tasks", tasks);
+  const addNewtask = () => {
+    console.log("===> called")
+  }
+
   return (
     <div className="container">
       <div>
-        {tasks.map((task) => {
+        {tasks.map((task, i) => {
           return (
-            <div className="card">
+            <div className="card" key={i}>
               <p className="title">{task.title}</p>
               <p className="status">
                 {task.completed ? "- Completed": "- Not completed"}
@@ -20,8 +25,9 @@ const ToDoList = (props) => {
         })}
       </div>
       <div className="buttonContainer">
-        <button>Add Task</button>
+        <button onClick={() => setVisible(true)}>Add Task</button>
       </div>
+      <AddTask visible={visible} setVisible={setVisible} addNewtask={() => addNewtask()}/>
     </div>
   );
 };
