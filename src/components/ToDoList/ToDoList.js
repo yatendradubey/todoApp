@@ -28,6 +28,7 @@ const ToDoList = (props) => {
         if(task.completed) {
             count++;
         }
+        return null
     })
     return count;
   }
