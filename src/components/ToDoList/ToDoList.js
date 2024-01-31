@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState } from "react";
 import "./ToDoList.css";
 import AddTask from "./AddTask/AddTask";
 import { useNavigate } from "react-router-dom";
+import { TaskContext } from "../../TaskContext";
 
 const ToDoList = (props) => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState(props.sampleData);
   const [visible, setVisible] = useState(false);
+  const first = useContext(TaskContext)
+
   let count = 0;
 
   const addNewtask = (newTask) => {
@@ -19,7 +22,12 @@ const ToDoList = (props) => {
       },
     ];
     setTasks(newTasks);
+    first.setTaskList([...newTasks]);
   };
+
+  useEffect(() => {
+    console.log("===> first", first)
+  }, [tasks]);
 
   function handleClick(i) {
     navigate(`/editTask/${i}`);

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import sampleData from "./../../data/sampleData.json";
 import ToDoList from "../ToDoList/ToDoList";
+import { TaskContext } from "../../TaskContext";
 
 const Home = () => {
-  return <ToDoList sampleData={sampleData}></ToDoList>;
+    const [taskList, setTaskList] = useState();
+  return (
+    <TaskContext.Provider value={{ taskList, setTaskList }}>
+      <ToDoList sampleData={sampleData}></ToDoList>;
+    </TaskContext.Provider>
+  );
 };
 
 export default Home;

@@ -1,0 +1,15 @@
+.editTaskContainer {
+    margin: 20px;
+}
+
+.formContainer {
+    display: flex;
+}
+
+.textFieldStyle {
+    margin-right: 20px;
+}
+
+.saveButton {
+    margin-top: 20px;
+}
