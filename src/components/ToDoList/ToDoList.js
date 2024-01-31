@@ -8,7 +8,7 @@ const ToDoList = (props) => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState(props.sampleData);
   const [visible, setVisible] = useState(false);
-  const first = useContext(TaskContext)
+  const taskData = useContext(TaskContext)
 
   let count = 0;
 
@@ -22,12 +22,10 @@ const ToDoList = (props) => {
       },
     ];
     setTasks(newTasks);
-    first.setTaskList([...newTasks]);
+    taskData.setTaskList([...newTasks]);
   };
+  console.log("==> taskData", taskData)
 
-  useEffect(() => {
-    console.log("===> first", first)
-  }, [tasks,first]);
 
   function handleClick(i) {
     navigate(`/editTask/${i}`);

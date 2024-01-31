@@ -4,7 +4,7 @@ import ToDoList from "../ToDoList/ToDoList";
 import { TaskContext } from "../../TaskContext";
 
 const Home = () => {
-    const [taskList, setTaskList] = useState();
+    const [taskList, setTaskList] = useState({taskList: sampleData});
   return (
     <TaskContext.Provider value={{ taskList, setTaskList }}>
       <ToDoList sampleData={sampleData}></ToDoList>;
