@@ -15,7 +15,7 @@ const EditTask = (props) => {
   useEffect(() => {
     setTitle(taskDataList[id].title);
     setDescription(taskDataList[id].description);
-  }, []);
+  }, [taskDataList]);
 
   const handleSave = () => {
     console.log("===> save", title, description);
