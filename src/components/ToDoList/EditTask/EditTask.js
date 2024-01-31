@@ -9,7 +9,7 @@ const EditTask = (props) => {
   const taskData = useContext(TaskContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tasks, setTasks] = useState();
+  const [_tasks, setTasks] = useState();
   const taskDataList = taskData.taskList.taskList;
 
   useEffect(() => {
