@@ -9,7 +9,7 @@ const EditTask = (props) => {
   const taskData = useContext(TaskContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [_tasks, setTasks] = useState();
+  const [tasks, setTasks] = useState();
   const taskDataList = taskData.taskList.taskList;
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const EditTask = (props) => {
       completed: taskDataList[id].completed ? true : false,
     };
     setTasks(taskDataList);
-    console.log(taskData);
+    console.log(taskData, tasks);
     navigate(-1);
   };
 
