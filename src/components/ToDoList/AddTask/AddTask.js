@@ -3,7 +3,8 @@ import "./AddTask.css";
 
 export default function Addtask({ visible, setVisible, addNewtask }) {
   const modalRef = useRef(null);
-  const [newTask, setNewTask] = useState("");
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
 
   return (
     <>
@@ -34,19 +35,28 @@ export default function Addtask({ visible, setVisible, addNewtask }) {
               <b>Add Task</b>
             </span>
             <label className="titleLabel">Enter Task</label>
-              <input
-                type="text"
-                onChange={(e) => setNewTask(e.target.value)}
-              ></input>
-              <button
-                className="addTaskButton"
-                onClick={() => {
-                  setVisible(false);
-                  addNewtask(newTask);
-                }}
-              >
-                Add
-              </button>
+            <input
+              type="text"
+              onChange={(e) => setNewTitle(e.target.value)}
+            ></input>
+            <label className="descriptionLabel">Enter Description</label>
+            <input
+              type="text"
+              onChange={(e) => setNewDescription(e.target.value)}
+            ></input>
+            <button
+              className="addTaskButton"
+              onClick={() => {
+                setVisible(false);
+                addNewtask({
+                  title: newTitle,
+                  description: newDescription,
+                  completed: false 
+                });
+              }}
+            >
+              Add
+            </button>
             <button onClick={() => setVisible(false)}>close</button>
           </div>
         </div>

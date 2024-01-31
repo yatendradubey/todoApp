@@ -10,6 +10,9 @@
   margin-top: 30px;
   text-align: left;
 }
+.descriptionLabel {
+  text-align: left;
+}
 
 .addTaskButton {
   margin-top: 10px;

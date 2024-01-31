@@ -1,14 +1,17 @@
 [
   {
     "title": "Grab some Pizza",
+    "description": "Need to grab some pizza in evening",
     "completed": true
   },
   {
     "title": "Do your workout",
+    "description": "Need to do workout in morning",
     "completed": true
   },
   {
     "title": "Hangout with friends",
+    "description": "Have to hangout with friends",
     "completed": false
   }
 ]

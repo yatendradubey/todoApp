@@ -5,7 +5,8 @@
 
 .card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    text-align: left;
     margin-left: 20px;
     margin-bottom: 10px;
     border: 1px solid #333333;
@@ -49,4 +50,9 @@
    flex-direction: row;
    margin-left: 20px; 
    margin-bottom: 20px;
+}
+
+.fuzzySearchContainer {
+    margin-top: 20px;
+    margin-left: 10px;
 }

@@ -8,7 +8,7 @@ const ToDoList = (props) => {
   let count = 0;
 
   const addNewtask = (newTask) => {
-    const newTasks = [...tasks, { title: newTask, completed: false }];
+    const newTasks = [...tasks, { title: newTask.title, description: newTask.description, completed: newTask.completed }];
     setTasks(newTasks);
   };
 
@@ -22,16 +22,16 @@ const ToDoList = (props) => {
     setTasks(updatedTasks);
   };
 
-  const calculateCompletedTask = () =>  {
+  const calculateCompletedTask = () => {
     count = 0;
     tasks.map((task) => {
-        if(task.completed) {
-            count++;
-        }
-        return null
-    })
+      if (task.completed) {
+        count++;
+      }
+      return null;
+    });
     return count;
-  }
+  };
 
   return (
     <div>
@@ -41,13 +41,21 @@ const ToDoList = (props) => {
           <label>Completed Task: {calculateCompletedTask()}</label>&nbsp;
           <label>Pending Task: {tasks.length - calculateCompletedTask()}</label>
         </div>
+        <div className="fuzzySearchContainer">
+          <label>Fuzzy Search</label>&nbsp;
+          <input
+            type="text"
+            // onChange={(e) => setNewTask(e.target.value)}
+          ></input>
+        </div>
         {tasks.map((task, i) => {
           return (
             <div className="card-container" key={i}>
               <div className="card">
-                <p className="title">{task.title}</p>
+                <p className="title">Title: {task.title}</p>
+                <p className="title">Description: {task.description}</p>
                 <p className="status">
-                  {task.completed ? "- Completed" : "- Not completed"}
+                  Status: {task.completed ? "Completed" : "Not completed"}
                 </p>
               </div>
               {!task.completed && (
