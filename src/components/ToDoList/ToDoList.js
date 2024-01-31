@@ -27,7 +27,7 @@ const ToDoList = (props) => {
 
   useEffect(() => {
     console.log("===> first", first)
-  }, [tasks]);
+  }, [tasks,first]);
 
   function handleClick(i) {
     navigate(`/editTask/${i}`);
