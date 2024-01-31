@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./EditTask.css";
+import { useParams } from "react-router-dom";
+import { TaskContext } from "../../../TaskContext";
 
 const EditTask = (props) => {
+  const { id } = useParams();
+  const taskData = useContext(TaskContext);
+  console.log("===> id", id);
+  console.log("===> taskDataEdit", taskData);
   return (
     <div className="editTaskContainer">
       <h2>Edit Task</h2>
