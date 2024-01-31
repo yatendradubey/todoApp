@@ -1,16 +1,29 @@
 import React, { useState } from "react";
 import "./ToDoList.css";
 import AddTask from "./AddTask/AddTask";
+import { useNavigate } from "react-router-dom";
 
 const ToDoList = (props) => {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState(props.sampleData);
   const [visible, setVisible] = useState(false);
   let count = 0;
 
   const addNewtask = (newTask) => {
-    const newTasks = [...tasks, { title: newTask.title, description: newTask.description, completed: newTask.completed }];
+    const newTasks = [
+      ...tasks,
+      {
+        title: newTask.title,
+        description: newTask.description,
+        completed: newTask.completed,
+      },
+    ];
     setTasks(newTasks);
   };
+
+  function handleClick(i) {
+    navigate(`/editTask/${i}`);
+  }
 
   const markAsCompleteOrIncomplete = (index) => {
     let updatedTasks = [...tasks];
@@ -58,6 +71,12 @@ const ToDoList = (props) => {
                   Status: {task.completed ? "Completed" : "Not completed"}
                 </p>
               </div>
+              <button
+                className="markCompleteButton"
+                onClick={() => handleClick(i)}
+              >
+                Edit Task
+              </button>
               {!task.completed && (
                 <button
                   className="markCompleteButton"
