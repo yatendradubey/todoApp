@@ -1,4 +1,4 @@
-import React, {useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ToDoList.css";
 import AddTask from "./AddTask/AddTask";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,12 @@ import { TaskContext } from "../../TaskContext";
 
 const ToDoList = (props) => {
   const navigate = useNavigate();
+  const taskData = useContext(TaskContext);
   const [tasks, setTasks] = useState(props.sampleData);
   const [visible, setVisible] = useState(false);
-  const taskData = useContext(TaskContext)
+  const [filterTask, setFilterTask] = useState("All");
+  const [filterPriority, setFilterPriority] = useState("All");
+  const [allTasks, setAllTasks] = useState();
 
   let count = 0;
 
@@ -24,7 +27,6 @@ const ToDoList = (props) => {
     setTasks(newTasks);
     taskData.setTaskList([...newTasks]);
   };
-
 
   function handleClick(i) {
     navigate(`/editTask/${i}`);
@@ -51,6 +53,44 @@ const ToDoList = (props) => {
     return count;
   };
 
+  const handleTaskFilter = (event) => {
+    const tasksCopy = JSON.parse(JSON.stringify(taskData.taskList.taskList));
+    setFilterTask(event.target.value);
+    if (event.target.value === "Active") {
+      const activeTasks = tasksCopy.filter((task) => !task.completed);
+      setTasks(activeTasks);
+    } else if (event.target.value === "Completed") {
+      const completedTasks = tasksCopy.filter((task) => task.completed);
+      setTasks(completedTasks);
+    } else {
+      setTasks(tasksCopy);
+    }
+  };
+
+  const handlePriorityFilter = (event) => {
+    console.log("===> event", event.target.value, taskData.taskList.taskList);
+    const tasksCopy = JSON.parse(JSON.stringify(taskData.taskList.taskList));
+    setFilterPriority(event.target.value);
+    if (event.target.value === "High") {
+      const highPriorityTasks = tasksCopy.filter(
+        (task) => task.priority === "High"
+      );
+      setTasks(highPriorityTasks);
+    } else if (event.target.value === "Medium") {
+      const mediumPriorityTasks = tasksCopy.filter(
+        (task) => task.priority === "Medium"
+      );
+      setTasks(mediumPriorityTasks);
+    } else if (event.target.value === "Low") {
+      const lowPriorityTasks = tasksCopy.filter(
+        (task) => task.priority === "Low"
+      );
+      setTasks(lowPriorityTasks);
+    } else {
+      setTasks(tasksCopy);
+    }
+  };
+
   return (
     <div>
       <div className="container">
@@ -59,12 +99,24 @@ const ToDoList = (props) => {
           <label>Completed Task: {calculateCompletedTask()}</label>&nbsp;
           <label>Pending Task: {tasks.length - calculateCompletedTask()}</label>
         </div>
-        <div className="fuzzySearchContainer">
-          <label>Fuzzy Search</label>&nbsp;
-          <input
-            type="text"
-            // onChange={(e) => setNewTask(e.target.value)}
-          ></input>
+        <div className="filterContainer">
+          <div className="filterTaskContainer">
+            <label>Filter Task</label>&nbsp;
+            <select value={filterTask} onChange={handleTaskFilter}>
+              <option value={"All"}>All</option>
+              <option value={"Active"}>Active</option>
+              <option value={"Completed"}>Completed</option>
+            </select>
+          </div>
+          <div className="filterTaskContainer">
+            <label>Filter Priority</label>&nbsp;
+            <select value={filterPriority} onChange={handlePriorityFilter}>
+              <option value={"All"}>All</option>
+              <option value={"High"}>High</option>
+              <option value={"Medium"}>Medium</option>
+              <option value={"Low"}>Low</option>
+            </select>
+          </div>
         </div>
         {tasks.map((task, i) => {
           return (
