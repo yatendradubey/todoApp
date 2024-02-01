@@ -24,7 +24,6 @@ const ToDoList = (props) => {
     setTasks(newTasks);
     taskData.setTaskList([...newTasks]);
   };
-  console.log("==> taskData", taskData)
 
 
   function handleClick(i) {
@@ -99,6 +98,8 @@ const ToDoList = (props) => {
                   Mark as Incomplete
                 </button>
               )}
+              <h5 className="priorityLabel">Priority:</h5>&nbsp;
+              <p>{task.priority}</p>
             </div>
           );
         })}
