@@ -51,7 +51,8 @@ export default function Addtask({ visible, setVisible, addNewtask }) {
                 addNewtask({
                   title: newTitle,
                   description: newDescription,
-                  completed: false 
+                  completed: false,
+                  priority: "Medium",
                 });
               }}
             >

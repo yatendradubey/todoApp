@@ -11,7 +11,7 @@ const EditTask = (props) => {
   const [description, setDescription] = useState("");
   const [tasks, setTasks] = useState();
   const [priority, setPriority] = React.useState();
-  const taskDataList = taskData.taskList.taskList;
+  const taskDataList = taskData.taskList;
   const priorityMapping = {
     High: 3,
     Medium: 2,

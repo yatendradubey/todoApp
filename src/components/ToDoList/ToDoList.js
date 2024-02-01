@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ToDoList.css";
 import AddTask from "./AddTask/AddTask";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ const ToDoList = (props) => {
   const [visible, setVisible] = useState(false);
   const [filterTask, setFilterTask] = useState("All");
   const [filterPriority, setFilterPriority] = useState("All");
-  const [allTasks, setAllTasks] = useState();
 
   let count = 0;
 
@@ -22,10 +21,12 @@ const ToDoList = (props) => {
         title: newTask.title,
         description: newTask.description,
         completed: newTask.completed,
+        priority: newTask.priority,
       },
     ];
     setTasks(newTasks);
     taskData.setTaskList([...newTasks]);
+    console.log("==> taskData",taskData)
   };
 
   function handleClick(i) {
@@ -54,7 +55,9 @@ const ToDoList = (props) => {
   };
 
   const handleTaskFilter = (event) => {
-    const tasksCopy = JSON.parse(JSON.stringify(taskData.taskList.taskList));
+    console.log("===> event",taskData.taskList);
+    const tasksCopy = JSON.parse(JSON.stringify(taskData.taskList));
+    setFilterPriority("All");
     setFilterTask(event.target.value);
     if (event.target.value === "Active") {
       const activeTasks = tasksCopy.filter((task) => !task.completed);
@@ -68,8 +71,8 @@ const ToDoList = (props) => {
   };
 
   const handlePriorityFilter = (event) => {
-    console.log("===> event", event.target.value, taskData.taskList.taskList);
-    const tasksCopy = JSON.parse(JSON.stringify(taskData.taskList.taskList));
+    const tasksCopy = JSON.parse(JSON.stringify(taskData.taskList));
+    setFilterTask("All");
     setFilterPriority(event.target.value);
     if (event.target.value === "High") {
       const highPriorityTasks = tasksCopy.filter(
@@ -108,6 +111,9 @@ const ToDoList = (props) => {
               <option value={"Completed"}>Completed</option>
             </select>
           </div>
+          {(filterTask === "Active" || filterTask === "Completed") && (
+            <span>*</span>
+          )}
           <div className="filterTaskContainer">
             <label>Filter Priority</label>&nbsp;
             <select value={filterPriority} onChange={handlePriorityFilter}>
@@ -117,6 +123,9 @@ const ToDoList = (props) => {
               <option value={"Low"}>Low</option>
             </select>
           </div>
+          {(filterPriority === "High" ||
+            filterPriority === "Medium" ||
+            filterPriority === "Low") && <span>*</span>}
         </div>
         {tasks.map((task, i) => {
           return (

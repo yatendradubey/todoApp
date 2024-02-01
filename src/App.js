@@ -7,7 +7,7 @@ import sampleData from "./data/sampleData.json";
 import { TaskContext } from "./TaskContext";
 
 function App() {
-  const [taskList, setTaskList] = useState({ taskList: sampleData });
+  const [taskList, setTaskList] = useState(sampleData);
   return (
     <div className="App">
       <h1>To Do List App</h1>'
