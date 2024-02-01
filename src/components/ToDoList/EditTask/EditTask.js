@@ -25,7 +25,7 @@ const EditTask = (props) => {
   }, [taskDataList, id]);
 
   function getKeyByValue(object, value) {
-    return Object.keys(object).find((key) => object[key] == value);
+    return Object.keys(object).find((key) => object[key] === Number(value));
   }
 
   const handleSave = () => {
